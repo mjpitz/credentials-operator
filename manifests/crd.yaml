@@ -1,0 +1,50 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: credentials.credentials.mjpitz.com
+spec:
+  group: credentials.mjpitz.com
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                credentials:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+                      requirements:
+                        type: object
+                        properties:
+                          length:
+                            type: integer
+                          characterSet:
+                            type: string
+                views:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      secretRef:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                      stringDataTemplate:
+                        type: object
+  scope: Namespaced
+  names:
+    plural: credentials
+    singular: credentials
+    kind: Credentials
+    shortNames:
+      - creds
