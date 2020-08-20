@@ -6,14 +6,13 @@ package v1alpha1
 
 import (
 	credentials "github.com/mjpitz/credentials-operator/pkg/apis/credentials.mjpitz.com"
-
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 )
 
 var (
-	CredentialsResourceName = "credentialses"
+	CredentialResourceName = "credentials"
 )
 
 // SchemeGroupVersion is group version used to register these objects
@@ -37,8 +36,8 @@ var (
 // Adds the list of known types to Scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
-		&Credentials{},
-		&CredentialsList{},
+		&Credential{},
+		&CredentialList{},
 	)
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil

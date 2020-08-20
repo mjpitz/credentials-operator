@@ -5,13 +5,12 @@ package v1alpha1
 import (
 	v1alpha1 "github.com/mjpitz/credentials-operator/pkg/apis/credentials.mjpitz.com/v1alpha1"
 	"github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned/scheme"
-
 	rest "k8s.io/client-go/rest"
 )
 
 type CredentialsV1alpha1Interface interface {
 	RESTClient() rest.Interface
-	CredentialsesGetter
+	CredentialsGetter
 }
 
 // CredentialsV1alpha1Client is used to interact with features provided by the credentials.mjpitz.com group.
@@ -19,8 +18,8 @@ type CredentialsV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *CredentialsV1alpha1Client) Credentialses(namespace string) CredentialsInterface {
-	return newCredentialses(c, namespace)
+func (c *CredentialsV1alpha1Client) Credentials(namespace string) CredentialInterface {
+	return newCredentials(c, namespace)
 }
 
 // NewForConfig creates a new CredentialsV1alpha1Client for the given config.

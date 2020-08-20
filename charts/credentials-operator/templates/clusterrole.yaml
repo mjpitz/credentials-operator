@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "credentials-operator.fullname" . }}
+  labels:
+    {{- include "credentials-operator.labels" . | nindent 4 }}
+rules:
+  - apiGroups: ["credentials.mjpitz.com"]
+    resources: ["credentials"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]

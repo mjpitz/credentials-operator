@@ -8,8 +8,8 @@ import (
 
 // Interface provides access to all the informers in this group version.
 type Interface interface {
-	// Credentialses returns a CredentialsInformer.
-	Credentialses() CredentialsInformer
+	// Credentials returns a CredentialInformer.
+	Credentials() CredentialInformer
 }
 
 type version struct {
@@ -23,7 +23,7 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
 }
 
-// Credentialses returns a CredentialsInformer.
-func (v *version) Credentialses() CredentialsInformer {
-	return &credentialsInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+// Credentials returns a CredentialInformer.
+func (v *version) Credentials() CredentialInformer {
+	return &credentialInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }

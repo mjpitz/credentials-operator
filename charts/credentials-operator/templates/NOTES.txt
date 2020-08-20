@@ -1,5 +1,8 @@
+You can create a new credential by issuing:
+
+cat <<EOF | kubectl apply -f-
 apiVersion: credentials.mjpitz.com/v1alpha1
-kind: Credentials
+kind: Credential
 metadata:
   name: bitnami-mysql-passwords
 spec:
@@ -28,3 +31,4 @@ spec:
       stringDataTemplate:
         DB_DRIVER: mysql
         DB_CONNECTION_STRING: myapp:${DB_PASSWORD}@tcp(mysql:3306)/dbname
+EOF

@@ -2,10 +2,10 @@
 
 package v1alpha1
 
-// CredentialsListerExpansion allows custom methods to be added to
-// CredentialsLister.
-type CredentialsListerExpansion interface{}
+// CredentialListerExpansion allows custom methods to be added to
+// CredentialLister.
+type CredentialListerExpansion interface{}
 
-// CredentialsNamespaceListerExpansion allows custom methods to be added to
-// CredentialsNamespaceLister.
-type CredentialsNamespaceListerExpansion interface{}
+// CredentialNamespaceListerExpansion allows custom methods to be added to
+// CredentialNamespaceLister.
+type CredentialNamespaceListerExpansion interface{}

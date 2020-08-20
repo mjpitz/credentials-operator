@@ -48,7 +48,7 @@ func main() {
 	Register(ctx,
 		kubeClient.CoreV1().Events(""),
 		core.Core().V1().Secret(),
-		creds.Credentials().V1alpha1().Credentials())
+		creds.Credentials().V1alpha1().Credential())
 
 	// Start all the controllers
 	if err := start.All(ctx, 2, core, creds); err != nil {

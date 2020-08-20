@@ -6,9 +6,7 @@ import (
 	"fmt"
 
 	v1alpha1 "github.com/mjpitz/credentials-operator/pkg/apis/credentials.mjpitz.com/v1alpha1"
-
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
-
 	cache "k8s.io/client-go/tools/cache"
 )
 
@@ -39,8 +37,8 @@ func (f *genericInformer) Lister() cache.GenericLister {
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
 	// Group=credentials.mjpitz.com, Version=v1alpha1
-	case v1alpha1.SchemeGroupVersion.WithResource("credentialses"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Credentials().V1alpha1().Credentialses().Informer()}, nil
+	case v1alpha1.SchemeGroupVersion.WithResource("credentials"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Credentials().V1alpha1().Credentials().Informer()}, nil
 
 	}
 

@@ -10,11 +10,9 @@ import (
 	versioned "github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned"
 	credentialsmjpitzcom "github.com/mjpitz/credentials-operator/pkg/generated/informers/externalversions/credentials.mjpitz.com"
 	internalinterfaces "github.com/mjpitz/credentials-operator/pkg/generated/informers/externalversions/internalinterfaces"
-
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
-
 	cache "k8s.io/client-go/tools/cache"
 )
 

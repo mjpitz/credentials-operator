@@ -7,13 +7,13 @@ import (
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// Credentials
-type Credentials struct {
+// Credential
+type Credential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   CredentialsSpec   `json:"spec"`
-	Status CredentialsStatus `json:"status"`
+	Spec   CredentialSpec   `json:"spec"`
+	Status CredentialStatus `json:"status"`
 }
 
 // Requirements
@@ -22,8 +22,8 @@ type Requirements struct {
 	CharacterSet string `json:"characterSet"`
 }
 
-// Credential
-type Credential struct {
+// CredentialRequirements
+type CredentialRequirements struct {
 	Key          string       `json:"key"`
 	Requirements Requirements `json:"requirements"`
 }
@@ -33,18 +33,18 @@ type SecretRef struct {
 	Name string `json:"name"`
 }
 
-// View
-type View struct {
+// CredentialView
+type CredentialView struct {
 	SecretRef          SecretRef         `json:"secretRef"`
 	StringDataTemplate map[string]string `json:"stringDataTemplate"`
 }
 
-// CredentialsSpec
-type CredentialsSpec struct {
-	Credentials []Credential `json:"credentials"`
-	Views       []View       `json:"views"`
+// CredentialSpec
+type CredentialSpec struct {
+	Credentials []CredentialRequirements `json:"credentials"`
+	Views       []CredentialView         `json:"views"`
 }
 
-// CredentialsStatus
-type CredentialsStatus struct {
+// CredentialStatus
+type CredentialStatus struct {
 }

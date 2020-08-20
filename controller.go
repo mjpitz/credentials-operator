@@ -26,7 +26,7 @@ func Register(
 	ctx context.Context,
 	events typedcorev1.EventInterface,
 	secrets wrangercorev1.SecretController,
-	credentials controller.CredentialsController) {
+	credentials controller.CredentialController) {
 
 	h := &Handler{
 		secrets:          secrets,
@@ -52,8 +52,8 @@ func createEventRecorder(events typedcorev1.EventInterface) record.EventRecorder
 type Handler struct {
 	secrets          wrangercorev1.SecretClient
 	secretsCache     wrangercorev1.SecretCache
-	credentials      controller.CredentialsClient
-	credentialsCache controller.CredentialsCache
+	credentials      controller.CredentialClient
+	credentialsCache controller.CredentialCache
 	recorder         record.EventRecorder
 }
 
@@ -61,6 +61,6 @@ func (h *Handler) OnSecretChanged(key string, secret *corev1.Secret) (*corev1.Se
 	return secret, nil
 }
 
-func (h *Handler) OnCredentialsChanged(key string, creds *types.Credentials) (*types.Credentials, error) {
+func (h *Handler) OnCredentialsChanged(key string, creds *types.Credential) (*types.Credential, error) {
 	return creds, nil
 }

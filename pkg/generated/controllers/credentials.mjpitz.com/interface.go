@@ -6,7 +6,6 @@ import (
 	clientset "github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned"
 	v1alpha1 "github.com/mjpitz/credentials-operator/pkg/generated/controllers/credentials.mjpitz.com/v1alpha1"
 	informers "github.com/mjpitz/credentials-operator/pkg/generated/informers/externalversions/credentials.mjpitz.com"
-
 	"github.com/rancher/wrangler/pkg/generic"
 )
 

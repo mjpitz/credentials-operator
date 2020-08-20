@@ -14,7 +14,7 @@ func main() {
 		Groups: map[string]args.Group{
 			"credentials.mjpitz.com": {
 				Types: []interface{}{
-					v1alpha1.Credentials{},
+					v1alpha1.Credential{},
 				},
 				GenerateTypes: true,
 			},

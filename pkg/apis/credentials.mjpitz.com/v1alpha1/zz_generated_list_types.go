@@ -10,16 +10,16 @@ import (
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// CredentialsList is a list of Credentials resources
-type CredentialsList struct {
+// CredentialList is a list of Credential resources
+type CredentialList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata"`
 
-	Items []Credentials `json:"items"`
+	Items []Credential `json:"items"`
 }
 
-func NewCredentials(namespace, name string, obj Credentials) *Credentials {
-	obj.APIVersion, obj.Kind = SchemeGroupVersion.WithKind("Credentials").ToAPIVersionAndKind()
+func NewCredential(namespace, name string, obj Credential) *Credential {
+	obj.APIVersion, obj.Kind = SchemeGroupVersion.WithKind("Credential").ToAPIVersionAndKind()
 	obj.Name = name
 	obj.Namespace = namespace
 	return &obj
