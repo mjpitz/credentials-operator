@@ -11,6 +11,10 @@ fmt:
 	go-groups -w .
 	gofmt -s -w .
 
+generate:
+	go generate
+	make fmt
+
 test:
 	go vet ./...
 	go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...

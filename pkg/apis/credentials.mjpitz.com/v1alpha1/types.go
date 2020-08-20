@@ -18,7 +18,7 @@ type Credential struct {
 
 // Requirements
 type Requirements struct {
-	Length       *uint  `json:"length"`
+	Length       uint   `json:"length"`
 	CharacterSet string `json:"characterSet"`
 }
 

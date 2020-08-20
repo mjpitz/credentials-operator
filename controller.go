@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"math/rand"
 	"os"
+	"strings"
 
 	types "github.com/mjpitz/credentials-operator/pkg/apis/credentials.mjpitz.com/v1alpha1"
 	scheme "github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned/scheme"
@@ -106,7 +108,8 @@ func (h *Handler) OnCredentialsChanged(key string, creds *types.Credential) (*ty
 		}
 
 		if err != nil {
-			// log?
+			logrus.Errorf("failed to create/update secret: %s", err)
+			return nil, nil
 		}
 	}
 
@@ -178,6 +181,30 @@ func newSecret(credential *types.Credential, prior *corev1.Secret) []*corev1.Sec
 	return secrets
 }
 
+var characterSetMap = map[string][]string{
+	"a-z": strings.Split("abcdefghijklmnopqrstuvwxyz", ""),
+	"A-Z": strings.Split("ABCDEFGHIJKLMNOPQRSTUVWZYZ", ""),
+	"0-9": strings.Split("012345689", ""),
+}
+
 func generateValue(requirements types.Requirements) string {
-	return ""
+	alpha := make([]string, 0)
+
+	for key, value := range characterSetMap {
+		if strings.Contains(requirements.CharacterSet, key) {
+			alpha = append(alpha, value...)
+		}
+	}
+
+	rand.Shuffle(len(alpha), func(i, j int) {
+		alpha[i], alpha[j] = alpha[j], alpha[i]
+	})
+
+	result := make([]string, requirements.Length)
+	for i := 0; i < int(requirements.Length); i++ {
+		next := rand.Int31n(int32(len(alpha)))
+		result[i] = alpha[next]
+	}
+
+	return strings.Join(result, "")
 }
