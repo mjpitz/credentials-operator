@@ -4,6 +4,7 @@ package fake
 
 import (
 	v1alpha1 "github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned/typed/credentials.mjpitz.com/v1alpha1"
+
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

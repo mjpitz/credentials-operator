@@ -6,6 +6,7 @@ package v1alpha1
 
 import (
 	credentials "github.com/mjpitz/credentials-operator/pkg/apis/credentials.mjpitz.com"
+
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"

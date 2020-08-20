@@ -10,10 +10,12 @@ import (
 	clientset "github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned/typed/credentials.mjpitz.com/v1alpha1"
 	informers "github.com/mjpitz/credentials-operator/pkg/generated/informers/externalversions/credentials.mjpitz.com/v1alpha1"
 	listers "github.com/mjpitz/credentials-operator/pkg/generated/listers/credentials.mjpitz.com/v1alpha1"
+
 	"github.com/rancher/wrangler/pkg/apply"
 	"github.com/rancher/wrangler/pkg/condition"
 	"github.com/rancher/wrangler/pkg/generic"
 	"github.com/rancher/wrangler/pkg/kv"
+
 	"k8s.io/apimachinery/pkg/api/equality"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -23,6 +25,7 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/apimachinery/pkg/watch"
+
 	"k8s.io/client-go/tools/cache"
 )
 
