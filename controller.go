@@ -142,6 +142,8 @@ func newSecret(credential *types.Credential, prior *corev1.Secret) []*corev1.Sec
 		}
 	}
 
+	prior.StringData = updated
+
 	secrets := []*corev1.Secret{
 		prior,
 	}
