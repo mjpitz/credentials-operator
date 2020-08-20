@@ -6,8 +6,10 @@ import (
 	clientset "github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned"
 	credentialsv1alpha1 "github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned/typed/credentials.mjpitz.com/v1alpha1"
 	fakecredentialsv1alpha1 "github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned/typed/credentials.mjpitz.com/v1alpha1/fake"
+
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
+
 	"k8s.io/client-go/discovery"
 	fakediscovery "k8s.io/client-go/discovery/fake"
 	"k8s.io/client-go/testing"

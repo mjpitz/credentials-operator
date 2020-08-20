@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	v1alpha1 "github.com/mjpitz/credentials-operator/pkg/apis/credentials.mjpitz.com/v1alpha1"
 	"github.com/mjpitz/credentials-operator/pkg/generated/clientset/versioned/scheme"
+
 	rest "k8s.io/client-go/rest"
 )
 

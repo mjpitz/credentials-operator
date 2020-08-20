@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/mjpitz/credentials-operator/pkg/apis/credentials.mjpitz.com/v1alpha1"
+
 	controllergen "github.com/rancher/wrangler/pkg/controller-gen"
 	"github.com/rancher/wrangler/pkg/controller-gen/args"
 )

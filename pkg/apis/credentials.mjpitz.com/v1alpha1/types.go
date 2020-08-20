@@ -18,13 +18,13 @@ type Credentials struct {
 
 // Requirements
 type Requirements struct {
-	Length *uint `json:"length"`
+	Length       *uint  `json:"length"`
 	CharacterSet string `json:"characterSet"`
 }
 
 // Credential
 type Credential struct {
-	Key string `json:"key"`
+	Key          string       `json:"key"`
 	Requirements Requirements `json:"requirements"`
 }
 
@@ -35,14 +35,14 @@ type SecretRef struct {
 
 // View
 type View struct {
-	SecretRef SecretRef `json:"secretRef"`
+	SecretRef          SecretRef         `json:"secretRef"`
 	StringDataTemplate map[string]string `json:"stringDataTemplate"`
 }
 
 // CredentialsSpec
 type CredentialsSpec struct {
 	Credentials []Credential `json:"credentials"`
-	Views []View `json:"views"`
+	Views       []View       `json:"views"`
 }
 
 // CredentialsStatus
