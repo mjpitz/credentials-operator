@@ -42,7 +42,7 @@ func Register(
 		recorder:         createEventRecorder(events),
 	}
 
-	secrets.OnChange(ctx, controllerAgentName, h.OnSecretChanged)
+	//secrets.OnChange(ctx, controllerAgentName, h.OnSecretChanged)
 	credentials.OnChange(ctx, controllerAgentName, h.OnCredentialsChanged)
 }
 
@@ -92,6 +92,12 @@ func (h *Handler) OnCredentialsChanged(key string, creds *types.Credential) (*ty
 		return nil, nil
 	}
 
+	// fetch the latest
+	creds, err := h.credentials.Get(creds.Namespace, creds.Name, metav1.GetOptions{})
+	if err != nil {
+		return nil, nil
+	}
+
 	last, _ := h.secretsCache.Get(creds.Namespace, creds.Name)
 	if last != nil && !metav1.IsControlledBy(last, creds) {
 		return nil, nil
@@ -130,13 +136,16 @@ func newSecret(credential *types.Credential, prior *corev1.Secret) []*corev1.Sec
 					}),
 				},
 			},
-			StringData: map[string]string{},
 		}
 	}
 
-	previous := prior.StringData
-	updated := map[string]string{}
+	// from what I can tell wrangler takes care of the encoding / decoding of secret data for us
+	previous := make(map[string]string)
+	for key, value := range prior.Data {
+		previous[key] = string(value)
+	}
 
+	updated := make(map[string]string, len(credential.Spec.Credentials))
 	for _, credential := range credential.Spec.Credentials {
 		if prev, ok := previous[credential.Key]; ok {
 			updated[credential.Key] = prev
@@ -145,16 +154,20 @@ func newSecret(credential *types.Credential, prior *corev1.Secret) []*corev1.Sec
 		}
 	}
 
+	prior.Data = nil
 	prior.StringData = updated
 
 	secrets := []*corev1.Secret{
 		prior,
 	}
 
+	logrus.Info("views: ", credential.Spec.Views)
+
 	for _, view := range credential.Spec.Views {
-		data := map[string]string{}
+		stringData := make(map[string]string, len(view.StringDataTemplate))
+
 		for key, value := range view.StringDataTemplate {
-			data[key] = os.Expand(value, func(s string) string {
+			stringData[key] = os.Expand(value, func(s string) string {
 				if val, ok := updated[s]; ok {
 					return val
 				}
@@ -174,7 +187,7 @@ func newSecret(credential *types.Credential, prior *corev1.Secret) []*corev1.Sec
 					}),
 				},
 			},
-			StringData: data,
+			StringData: stringData,
 		})
 	}
 
