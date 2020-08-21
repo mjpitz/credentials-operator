@@ -92,12 +92,6 @@ func (h *Handler) OnCredentialsChanged(key string, creds *types.Credential) (*ty
 		return nil, nil
 	}
 
-	// fetch the latest
-	creds, err := h.credentials.Get(creds.Namespace, creds.Name, metav1.GetOptions{})
-	if err != nil {
-		return nil, nil
-	}
-
 	last, _ := h.secretsCache.Get(creds.Namespace, creds.Name)
 	if last != nil && !metav1.IsControlledBy(last, creds) {
 		return nil, nil
@@ -160,8 +154,6 @@ func newSecret(credential *types.Credential, prior *corev1.Secret) []*corev1.Sec
 	secrets := []*corev1.Secret{
 		prior,
 	}
-
-	logrus.Info("views: ", credential.Spec.Views)
 
 	for _, view := range credential.Spec.Views {
 		stringData := make(map[string]string, len(view.StringDataTemplate))
